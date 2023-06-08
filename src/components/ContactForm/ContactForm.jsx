@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
-import shortid from 'shortid';
+import { nanoid } from '@reduxjs/toolkit';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { FormContact, Error, InputForm, LabelForm, ButtonForm } from './ContactForm.styled';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../redux/contactSlice';
+import { getContacts } from '../redux/selectors';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -14,13 +18,30 @@ const initialValues = {
   number: '',
 };
 
-const nameInputId = shortid.generate();
-const numberInputId = shortid.generate();
+const nameInputId = nanoid();
+const numberInputId = nanoid();
 
-const ContactForm = ({ onSubmit }) => {
-  const handleSubmit = (values, { resetForm }) => {
-    onSubmit(values);
-    resetForm();
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+  const handleSubmit  = e => {
+    e.preventDefault();
+    // resetForm();
+    
+    const name = e.target.elements.name.value;
+    if (contacts.find(el => el.name === name)) {
+      alert(name + ' already exists in the phone book');
+      e.target.reset();
+      return;
+    }
+    const number = e.target.elements.number.value;
+    const newContact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+    dispatch(addContact(newContact));
+    e.target.reset();
   };
 
   return (
