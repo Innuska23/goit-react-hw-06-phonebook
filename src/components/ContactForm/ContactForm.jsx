@@ -26,7 +26,6 @@ const ContactForm = () => {
   const contacts = useSelector(getContacts);
   const handleSubmit  = e => {
     e.preventDefault();
-    // resetForm();
     
     const name = e.target.elements.name.value;
     if (contacts.find(el => el.name === name)) {
@@ -82,9 +81,5 @@ const ContactForm = () => {
     </Formik>
   );
 }
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
 
 export default ContactForm;
