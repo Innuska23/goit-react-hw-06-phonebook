@@ -5,11 +5,11 @@ import { useDispatch } from 'react-redux';
 
 import { Button, List, ListItem} from './ContactList.styled';
 
-function ContactList(id) {
+function ContactList({id}) {
     const dispatch = useDispatch();
-    const onDelete = () => {
-    dispatch(deleteContact({ id }));
-}
+    const onDelete = id => {
+        dispatch(deleteContact(id));
+    };
     const contacts = useSelector(getContacts);
     const filter = useSelector(getFilter);
     const filterContacts = contacts.filter(({ name }) =>
@@ -20,7 +20,7 @@ function ContactList(id) {
             {filterContacts.map(({ id, name, number }, idx) => (
                 <ListItem key={id}>
                     <span>{idx + 1}. {name}: {number} </span>
-                    <Button onClick={(id) => onDelete()}>delete</Button>
+                    <Button onClick={() => onDelete(id)}>delete</Button>
                 </ListItem>
             ))}
         </List>
