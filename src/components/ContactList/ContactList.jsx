@@ -11,7 +11,7 @@ function ContactList() {
     );
     return (
         <List>
-            {filterContacts?.map(({ id, name, number }, idx) => (
+            {filterContacts.map(({ id, name, number }, idx) => (
                 <ListItem key={id}>
                     <span>{idx + 1}. {name}: {number} </span>
                 </ListItem>

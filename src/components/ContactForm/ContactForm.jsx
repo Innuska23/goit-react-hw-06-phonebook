@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { nanoid } from '@reduxjs/toolkit';
 import { Formik } from 'formik';
 import * as yup from 'yup';
