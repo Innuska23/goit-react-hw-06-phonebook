@@ -24,15 +24,14 @@ const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
   const handleSubmit  = e => {
-    e.preventDefault();
     
-    const name = e.target.elements.name.value;
+    const name = e.name;
     if (contacts.find(el => el.name === name)) {
-      alert(name + ' already exists in the phone book');
+      alert(name + ' already added to the phone book');
       e.target.reset();
       return;
     }
-    const number = e.target.elements.number.value;
+    const number = e.number;
     const newContact = {
       id: nanoid(),
       name,
