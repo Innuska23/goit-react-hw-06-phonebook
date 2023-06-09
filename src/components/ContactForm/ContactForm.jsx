@@ -23,12 +23,12 @@ const numberInputId = nanoid();
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-  const handleSubmit  = e => {
-    
-    const name = e.name;
-    if (contacts.find(el => el.name === name)) {
-      alert(name + ' already added to the phone book');
-      e.target.reset();
+  const handleSubmit = (e, {resetForm }) => {
+
+    const name = e.name.trim();
+    if (contacts.find(el => el.name.toLowerCase() === name.toLowerCase())) {
+      alert(`${name} is already in contacts`);
+      resetForm();
       return;
     }
     const number = e.number;
@@ -38,7 +38,7 @@ const ContactForm = () => {
       number,
     };
     dispatch(addContact(newContact));
-    e.target.reset();
+    resetForm();
   };
 
   return (

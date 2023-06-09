@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const FilterContainer = styled.div `
+export const FilterContainer = styled.div`
     display: flex;
     flex-flow: column wrap;
     gap: 25px;
@@ -8,7 +8,7 @@ export const FilterContainer = styled.div `
     max-width: 450px;
 `;
 
-export const LabelFilter = styled.label `
+export const LabelFilter = styled.label`
     color: #333340;
     background: #ffffff;
     font-weight: 500;
